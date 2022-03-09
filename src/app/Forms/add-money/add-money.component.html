@@ -1,0 +1,6 @@
+<div>
+  Money: <input [formControl]="money">
+  <label *ngIf="money.invalid"
+         [ngClass]="'error'"></label>
+</div>
+<p>{{money}}</p>

@@ -1,0 +1,17 @@
+<div class="shopcart-card">
+  <h2>SHOPCART
+    <button (click)="goBack()">Go back to shop</button>
+  </h2>
+  <p>number of articles : {{shopcart.nbrArticles}}</p>
+  <p>total amount : {{shopcart.totalAmount | number: '1.0-2'}} EUR</p>
+  <div>
+    <img *ngFor="let article of shopcart.articlesArray" [src]="article.photoUrl" [alt]="article.title">
+  </div>
+</div>
+
+<app-wallet></app-wallet>
+<p>Money left after buying :
+  <span [ngClass]="{red: wallet.money - shopcart.totalAmount < 0}">{{wallet.money - shopcart.totalAmount | number: '1.0-2'}}</span>
+</p>
+
+<button (click)="onBuyShopcart()">BUY</button>

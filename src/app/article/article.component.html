@@ -1,0 +1,23 @@
+<div class="article-card" [ngClass]="{exhausted: article.stockRemaining === 0}">
+  <h2>{{article.title}}</h2>
+  <p>{{article.description}}</p>
+
+  <p>
+    Price :
+    <span [ngClass]="{line: article.enSolde}">{{article.price}}</span>
+    <span *ngIf="article.enSolde">  {{article.price/2}}</span>  EUR
+  </p>
+
+
+  <p *ngIf="article.stockRemaining !== 0">
+
+    Stock remaining : {{article.stockRemaining}}
+
+    <button (click)="onAddToShopCart(article)">Add to shopcart</button>
+  </p>
+  <p *ngIf="article.stockRemaining === 0">
+    Stock remaining : <span [ngStyle]="{color: 'rgb(250, 0, 0)'}">{{article.stockRemaining}}</span>
+  </p>
+  <img [src]="article.photoUrl" [alt]="article.title">
+</div>
+

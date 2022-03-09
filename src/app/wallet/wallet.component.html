@@ -1,0 +1,7 @@
+<div class="wallet-card">
+  <h2>WALLET</h2>
+  <p>Welcome {{wallet.userName}} !</p>
+  <p>Money : {{wallet.money | number: '1.0-2'}} EUR</p>
+</div>
+
+<button (click)="onAddMoney()">Add Money</button>
