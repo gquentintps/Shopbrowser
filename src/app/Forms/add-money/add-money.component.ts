@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Wallet} from "../../models/wallet.models";
+import {WalletService} from "../../services/wallet.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-money',
@@ -7,13 +10,34 @@ import {FormControl, Validators} from "@angular/forms";
   styleUrls: ['./add-money.component.scss']
 })
 export class AddMoneyComponent implements OnInit {
+  moneyField = new FormControl('');
+  wallet!: Wallet;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private walletService: WalletService,
+              private router: Router) {
   }
 
-  money = new FormControl('', [Validators.required, Validators.maxLength(15)]);
+  ngOnInit(): void {
+    this.wallet = this.walletService.getWallet();
+  }
+
+  onAddMoney() {
+    if (isNaN(this.moneyField.value) || this.moneyField.value < 0) {
+      window.alert('Only positive numbers');
+      this.moneyField.reset();
+      return;
+    }
+    this.wallet.money+= +this.moneyField.value;
+    this.moneyField.reset();
+  }
+
+  goBack(): void {
+    this.router.navigateByUrl('');
+  }
+
+  goShopcart(): void {
+    this.router.navigateByUrl('buy');
+  }
 
 }
 

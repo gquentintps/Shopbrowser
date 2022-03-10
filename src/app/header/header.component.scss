@@ -3,4 +3,17 @@ header {
   background-color: #EEE;
   margin-bottom: 20px;
   padding: 10px;
+  position: sticky;
+  top: 0px;
+}
+
+button {
+  display: block;
+  margin: auto;
+  width: 200px;
+  height: 100px;
+}
+
+.big {
+  font-size: 50px;
 }

@@ -1,6 +1,8 @@
-<div>
-  Money: <input [formControl]="money">
-  <label *ngIf="money.invalid"
-         [ngClass]="'error'"></label>
+<div class="wallet-card">
+  <p>Enter money to add</p>
+  <label for="moneyField"></label>
+  <input id="moneyField" [formControl]="moneyField">
+  <button (click)="onAddMoney()">ENTER</button>
 </div>
-<p>{{money}}</p>
+
+

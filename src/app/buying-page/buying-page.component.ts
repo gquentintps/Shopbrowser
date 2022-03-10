@@ -14,7 +14,7 @@ export class BuyingPageComponent implements OnInit {
   shopcart!: Shopcart;
   wallet!: Wallet;
 
-  constructor(private shopcartService: ShopcartService,
+  constructor(public shopcartService: ShopcartService,
               private router: Router,
               private walletService: WalletService) { }
 
@@ -28,11 +28,9 @@ export class BuyingPageComponent implements OnInit {
   }
 
   onBuyShopcart(): void {
-    if (this.wallet.money - this.shopcart.totalAmount >= 0) {
-      this.wallet.money -= this.shopcart.totalAmount;
+    if (this.wallet.money - this.shopcartService.getTotalAmount() >= 0) {
+      this.wallet.money -= this.shopcartService.getTotalAmount();
       this.shopcart.articlesArray = [];
-      this.shopcart.nbrArticles = 0;
-      this.shopcart.totalAmount = 0;
       this.goBack();
     }
     else window.alert('You don\'t have enough money');

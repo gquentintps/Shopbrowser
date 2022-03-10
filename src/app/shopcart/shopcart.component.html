@@ -1,20 +1,18 @@
 <div class="shopcart-card">
   <h2>SHOPCART
-  <button (click)="onEmptyShopcart()">Empty shopcart</button>
+    <button class = "empty" (click)="onEmptyShopcart()">Empty shopcart</button>
   </h2>
-  <p>number of articles : {{shopcart.nbrArticles}}</p>
-  <p>total amount : {{shopcart.totalAmount | number: '1.0-2'}} EUR</p>
-    <div>
-      <button *ngFor="let article of shopcart.articlesArray" class="over-delete">
-        <img [src]="article.photoUrl" [alt]="article.title">
-        <input (click)="onDelete(this.article)" type="image" src="https://www.educol.net/coloriage-poubelle-dl30483.jpg" style="border: double;" height="40" width="30"/>
-      </button>
-    </div>
+  <p>number of articles : {{shopcart.articlesArray.length}}</p>
+  <p>total amount : {{shopcartService.getTotalAmount()| number: '1.0-2'}} EUR</p>
+  <div>
+    <button *ngFor="let article of shopcart.articlesArray">
+      <img [src]="article.photoUrl" [alt]="article.title">
+      <input (click)="onDelete(this.article)" type="image" src="https://www.educol.net/coloriage-poubelle-dl30483.jpg" class="bin"/>
+    </button>
+  </div>
+  <button class ="purchase" (click)="goToBuyPage()">Finalize your purchases</button>
 </div>
 
-<div>
-  <div>
-    <a routerLink="buy">Finaliser vos achats</a>
-  </div>
-</div>
+
+
 

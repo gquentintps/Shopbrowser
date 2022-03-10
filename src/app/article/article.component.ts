@@ -1,7 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Article} from '../models/article.models';
 import {ShopcartService} from "../services/shopcart.service";
-import {WalletService} from "../services/wallet.service";
 
 
 @Component({
@@ -13,8 +12,8 @@ export class ArticleComponent implements  OnInit {
   @Input() article!: Article;
 
 
-  constructor(private shopcartService: ShopcartService,
-              private walletService: WalletService) {
+
+  constructor(private shopcartService: ShopcartService) {
   }
   ngOnInit() {
 
@@ -24,7 +23,6 @@ export class ArticleComponent implements  OnInit {
     if (article.stockRemaining > 0 ) {
       this.shopcartService.shopcart.articlesArray.push(article);
       article.stockRemaining--;
-      this.shopcartService.updateShopcart();
     }
   }
 }

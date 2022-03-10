@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Shopcart} from "../models/shopcart.models";
 import {ShopcartService} from "../services/shopcart.service";
 import {Article} from "../models/article.models";
-import {WalletService} from "../services/wallet.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shopcart',
@@ -12,8 +12,8 @@ import {WalletService} from "../services/wallet.service";
 export class ShopcartComponent implements OnInit {
   shopcart!: Shopcart;
 
-  constructor(private shopcartService: ShopcartService,
-              private walletService: WalletService) { }
+  constructor(public shopcartService: ShopcartService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.shopcart = this.shopcartService.getShopcart();
@@ -23,12 +23,14 @@ export class ShopcartComponent implements OnInit {
     const index: number = this.shopcart.articlesArray.indexOf(article);
     if (index !== -1) this.shopcart.articlesArray.splice(index, 1);
     article.stockRemaining++;
-    this.shopcartService.updateShopcart();
   }
 
   onEmptyShopcart(): void {
-    while (this.shopcart.articlesArray[0]) {
+    while(this.shopcart.articlesArray[0])
       this.onDelete(this.shopcart.articlesArray[0]);
-    }
+  }
+
+  goToBuyPage(): void {
+    this.router.navigateByUrl('buy');
   }
 }

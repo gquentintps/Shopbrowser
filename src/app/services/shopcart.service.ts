@@ -7,8 +7,6 @@ import {Shopcart} from "../models/shopcart.models";
 
 export class ShopcartService {
   shopcart: Shopcart = {
-    totalAmount: 0,
-    nbrArticles: 0,
     articlesArray: []
   }
 
@@ -16,12 +14,12 @@ export class ShopcartService {
     return this.shopcart;
   }
 
-  updateShopcart(): void {
-    this.shopcart.totalAmount = 0;
-    this.shopcart.nbrArticles = 0;
-    for (let article of this.shopcart.articlesArray) {
-      this.shopcart.nbrArticles++;
-      this.shopcart.totalAmount += article.price;
-    }
+  getTotalAmount(): number {
+    let totalAmount: number = 0;
+    for (let article of this.shopcart.articlesArray)
+      totalAmount+=article.price;
+    return totalAmount;
   }
+
+
 }
